@@ -34,10 +34,10 @@ public class ScheduleController {
             @RequestParam(required = false) String author,
             @RequestParam(required = false) String updatedAt) {
 
-        List<Schedule> schedules = scheduleService.getAllSchedules(author, updatedAt);
+        List<Schedule> schedule = scheduleService.getAllSchedules(author, updatedAt);
 
         //'List<Schedule>'는 'List<ScheduleDto>'로 변환
-        List<ScheduleResponseDto> scheduleResponseDtos = schedules.stream()
+        List<ScheduleResponseDto> scheduleResponseDtos = schedule.stream()
                 .map(ScheduleResponseDto::new)
                 .toList();
 

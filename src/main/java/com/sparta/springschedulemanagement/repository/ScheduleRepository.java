@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,27 +53,33 @@ public class ScheduleRepository {
 
     // 전체 일정 조회 (작성자명과 수정일로 필터링)
     public List<Schedule> findAll(String author, String updatedAt) {
-        String sql = "SELECT * FROM schedules WHERE 1=1";
+        StringBuilder sql = new StringBuilder("SELECT * FROM schedule WHERE 1=1");
+
+        List<Object> params = new ArrayList<>();
 
         if (author != null) {
-            sql += " AND author = ?";
+//            sql += " AND author = ?";
+            sql.append(" AND author = ?");
+            params.add(author);
         }
         if (updatedAt != null) {
-            sql += " AND DATE(updated_at) = ?";
+//            sql += " AND DATE(updated_at) = ?";
+            sql.append(" AND updatedAt = ?");
+            params.add(updatedAt);
         }
 
-        return jdbcTemplate.query(sql, new Object[]{author, updatedAt}, scheduleRowMapper());
+        return jdbcTemplate.query(sql.toString(), params.toArray(), scheduleRowMapper());
     }
 
     // ID로 일정 조회
     public Optional<Schedule> findById(Long id) {
         String sql = "SELECT * FROM schedule WHERE id = ?";
-        List<Schedule> schedules = jdbcTemplate.query(sql, new Object[]{id}, scheduleRowMapper());
+        List<Schedule> schedule = jdbcTemplate.query(sql, new Object[]{id}, scheduleRowMapper());
 
-        if (schedules.isEmpty()) {
+        if (schedule.isEmpty()) {
             return Optional.empty();
         }
-        return Optional.of(schedules.get(0));
+        return Optional.of(schedule.get(0));
     }
 
     // 일정 삭제
@@ -90,8 +97,8 @@ public class ScheduleRepository {
             schedule.setTask(rs.getString("task"));
             schedule.setAuthor(rs.getString("author"));
             schedule.setPassword(rs.getString("password"));
-            schedule.setCreatedAt(rs.getTimestamp("created_at").toLocalDateTime());
-            schedule.setUpdatedAt(rs.getTimestamp("updated_at").toLocalDateTime());
+            schedule.setCreatedAt(rs.getTimestamp("createdAt").toLocalDateTime());
+            schedule.setUpdatedAt(rs.getTimestamp("updatedAt").toLocalDateTime());
             return schedule;
         };
     }
