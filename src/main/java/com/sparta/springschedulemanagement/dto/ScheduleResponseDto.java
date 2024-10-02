@@ -1,10 +1,12 @@
 package com.sparta.springschedulemanagement.dto;
 
 import com.sparta.springschedulemanagement.entity.Schedule;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+@Getter
 public class ScheduleResponseDto {
     private Long id; // 고유 식별자
     private String title; // 할일
