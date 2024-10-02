@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Repository
@@ -46,7 +47,7 @@ public class ScheduleRepository {
         }, keyHolder);
 
         // 저장된 Schedule ID 세팅
-        schedule.setId(keyHolder.getKey().longValue());
+        schedule.setId(Objects.requireNonNull(keyHolder.getKey()).longValue());
 
         return schedule;
     }
