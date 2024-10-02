@@ -30,7 +30,7 @@ public class ScheduleService {
     }
 
     //전체 일정 조회 (일정의 수정일과 작성자명)
-    public List<Schedule> getAllSchedules (@RequestParam (required = false) String author, @RequestParam (required = false) String updatedAt) {
+    public List<Schedule> getAllSchedules (String author, String updatedAt) {
         return scheduleRepository.findAll(author, updatedAt);
     }
 
