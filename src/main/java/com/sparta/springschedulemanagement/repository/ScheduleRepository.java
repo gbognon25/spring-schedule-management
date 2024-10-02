@@ -66,6 +66,9 @@ public class ScheduleRepository {
             params.add(updatedAt);
         }
 
+        // 수정일 기준 내림차순으로 정렬하여 조회
+        sql.append(" ORDER BY updatedAt DESC");
+
         return jdbcTemplate.query(sql.toString(), params.toArray(), scheduleRowMapper());
     }
 
