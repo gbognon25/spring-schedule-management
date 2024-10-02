@@ -58,12 +58,10 @@ public class ScheduleRepository {
         List<Object> params = new ArrayList<>();
 
         if (author != null) {
-//            sql += " AND author = ?";
             sql.append(" AND author = ?");
             params.add(author);
         }
         if (updatedAt != null) {
-//            sql += " AND DATE(updated_at) = ?";
             sql.append(" AND updatedAt = ?");
             params.add(updatedAt);
         }
