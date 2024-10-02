@@ -4,11 +4,13 @@ import com.sparta.springschedulemanagement.dto.ScheduleRequestDto;
 import com.sparta.springschedulemanagement.dto.ScheduleResponseDto;
 import com.sparta.springschedulemanagement.entity.Schedule;
 import com.sparta.springschedulemanagement.repository.ScheduleRepository;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class ScheduleService {
     private final ScheduleRepository scheduleRepository;
 
