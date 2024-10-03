@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@NoArgsConstructor // Generates a no-argument constructor
+@NoArgsConstructor
 public class Schedule {
 
     private Long id; // 고유 식별자
